@@ -264,6 +264,7 @@ plt.savefig(os.path.join(figures_dir, "rectangle_single.png"), dpi=150)
 #plt.show()
 
 #AIN LOOP: HOMOGRAPHIES + RECTANGLE ON ALL IMAGES
+print("\nTask 1\n")
 Hs           = []
 good_images  = []
 drawn_images = []
@@ -325,6 +326,7 @@ print("R[0] =\n", Rs[0])
 check_rotation_matrix(Rs[0])
 
 #TASK 2: REPROJECTION ERROR 
+print("\nTask 2: computing reprojection error.\n")
 i_img = 0
 img_path = good_images[i_img]
 
@@ -377,10 +379,10 @@ plt.savefig(os.path.join(figures_dir, "reprojection_error.png"), dpi=150)
 #plt.show()
 
 # TASK 3: 3D CYLINDER SUPERIMPOSITION
-M    = 25
+M = 25
 idxs = list(range(min(M, len(good_images))))
 
-print("Using", len(idxs), "images for Task 3.")
+print("\nUsing", len(idxs),"images for Task 3.\n")
 print("Example image:", os.path.basename(good_images[idxs[0]]))
 print("len(good_images) =", len(good_images))
 print("len(Rs_ortho) =", len(Rs_ortho))
@@ -396,7 +398,7 @@ for i in idxs:
     cv2.imwrite(os.path.join(figures_dir, f"cylinder_{i:02d}.png"), out)
     cylinder_images.append(cv2.cvtColor(out, cv2.COLOR_BGR2RGB))
 
-print("Cilindro disegnato su", len(idxs), "immagini.")
+print("Cylinder drawn on ", len(idxs), " images.")
 
 compound_cylinder = create_compound_image(rows=5, cols=5, limages=cylinder_images)
 plt.figure(figsize=(12, 12))
@@ -416,7 +418,7 @@ std_v0 = []
 std_f = []
 num_ok = []
 
-print(f"Task 4: usando M = {M} immagini, tutti i subset possibili.")
+print(f"\nTask 4: using M = {M} images, on every possible subset.\n")
 
 for ell in Ls:
     u0_vals = []
